@@ -1,13 +1,14 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xD5C48FBFC0647294",
+      "boundary_crc": "0xD5C48FBFD9F6705B",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../pb_logique_seq.gen/sources_1/bd/design_1",
       "name": "design_1",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2021.2"
+      "tool_version": "2021.2",
+      "validated": "true"
     },
     "design_tree": {
       "M1_decodeur_i2s": {
@@ -60,8 +61,24 @@
         "type": "clk",
         "direction": "I",
         "parameters": {
+          "CLK_DOMAIN": {
+            "value": "design_1_clk_100MHz",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
           }
         }
       },
@@ -149,6 +166,10 @@
                     "value": "100000000",
                     "value_src": "user_prop"
                   },
+                  "PHASE": {
+                    "value": "0.0",
+                    "value_src": "default_prop"
+                  },
                   "CLK_DOMAIN": {
                     "value": "design_1_clk_100MHz",
                     "value_src": "default_prop"
@@ -188,7 +209,7 @@
                     "value_src": "user_prop"
                   },
                   "PHASE": {
-                    "value": "0.000",
+                    "value": "0.0",
                     "value_src": "default_prop"
                   },
                   "CLK_DOMAIN": {
@@ -250,6 +271,10 @@
                     "value": "100000000",
                     "value_src": "user_prop"
                   },
+                  "PHASE": {
+                    "value": "0.0",
+                    "value_src": "default_prop"
+                  },
                   "CLK_DOMAIN": {
                     "value": "design_1_clk_100MHz",
                     "value_src": "default_prop"
@@ -298,6 +323,10 @@
                     "value": "100000000",
                     "value_src": "user_prop"
                   },
+                  "PHASE": {
+                    "value": "0.0",
+                    "value_src": "default_prop"
+                  },
                   "CLK_DOMAIN": {
                     "value": "design_1_clk_100MHz",
                     "value_src": "default_prop"
@@ -345,6 +374,10 @@
                   "FREQ_HZ": {
                     "value": "100000000",
                     "value_src": "user_prop"
+                  },
+                  "PHASE": {
+                    "value": "0.0",
+                    "value_src": "default_prop"
                   },
                   "CLK_DOMAIN": {
                     "value": "design_1_clk_100MHz",
@@ -525,6 +558,10 @@
                     "value": "100000000",
                     "value_src": "user_prop"
                   },
+                  "PHASE": {
+                    "value": "0.0",
+                    "value_src": "default_prop"
+                  },
                   "CLK_DOMAIN": {
                     "value": "design_1_clk_100MHz",
                     "value_src": "default_prop"
@@ -564,7 +601,7 @@
                     "value_src": "user_prop"
                   },
                   "PHASE": {
-                    "value": "0.000",
+                    "value": "0.0",
                     "value_src": "default_prop"
                   },
                   "CLK_DOMAIN": {
@@ -681,6 +718,10 @@
                   "FREQ_HZ": {
                     "value": "100000000",
                     "value_src": "user_prop"
+                  },
+                  "PHASE": {
+                    "value": "0.0",
+                    "value_src": "default_prop"
                   },
                   "CLK_DOMAIN": {
                     "value": "design_1_clk_100MHz",
@@ -898,6 +939,10 @@
                 "value": "100000000",
                 "value_src": "user_prop"
               },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "default_prop"
+              },
               "CLK_DOMAIN": {
                 "value": "design_1_clk_100MHz",
                 "value_src": "default_prop"
@@ -944,7 +989,7 @@
                 "value_src": "user_prop"
               },
               "PHASE": {
-                "value": "0.000",
+                "value": "0.0",
                 "value_src": "default_prop"
               },
               "CLK_DOMAIN": {
@@ -991,7 +1036,7 @@
                 "value_src": "user_prop"
               },
               "PHASE": {
-                "value": "0.000",
+                "value": "0.0",
                 "value_src": "default_prop"
               },
               "CLK_DOMAIN": {
@@ -1038,7 +1083,7 @@
                 "value_src": "user_prop"
               },
               "PHASE": {
-                "value": "0.000",
+                "value": "0.0",
                 "value_src": "default_prop"
               },
               "CLK_DOMAIN": {
@@ -1258,7 +1303,17 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "user_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_100MHz",
+                "value_src": "default_prop"
+              }
+            }
           },
           "o_reset": {
             "type": "rst",

@@ -65,7 +65,7 @@ BEGIN
    d_reset         <= i_btn(3);         -- pas de contionnement particulier sur reset
    o_reset         <= d_reset;          -- pas de contionnement particulier sur reset
    
-   module_commande_mef : process
+   module_commande_mef : process (clk, d_strobe_btn)
    begin
         if (rising_edge(clk)) then
             if (d_reset = '1') then
@@ -74,40 +74,40 @@ BEGIN
             case state is
             when state_0 =>
                  -- Transitions vers les autres states
-                 if (d_strobe_btn(0) = '1' and d_btn_cd(0) = '1') then
+                 if (d_strobe_btn(0) = '1') then
                     state <= state_1;
                  end if;
-                 if (d_strobe_btn(1) = '1' and d_btn_cd(1) = '1') then
+                 if (d_strobe_btn(1) = '1') then
                     state <= state_3;
                  end if;
                  o_selection_fct <= "00";
                  
             when state_1 =>
                  -- Transitions vers les autres states
-                 if (d_strobe_btn(0) = '1' and d_btn_cd(0) = '1') then
+                 if (d_strobe_btn(0) = '1') then
                     state <= state_2;
                  end if;
-                 if (d_strobe_btn(1) = '1' and d_btn_cd(1) = '1') then
+                 if (d_strobe_btn(1) = '1') then
                     state <= state_0;
                  end if;
                  o_selection_fct <= "01";
                  
             when state_2 =>
                 -- Transitions vers les autres states
-                 if (d_strobe_btn(0) = '1' and d_btn_cd(0) = '1') then
+                 if (d_strobe_btn(0) = '1') then
                     state <= state_3;
                  end if;
-                 if (d_strobe_btn(1) = '1' and d_btn_cd(1) = '1') then
+                 if (d_strobe_btn(1) = '1') then
                     state <= state_1;
                  end if;
                  o_selection_fct <= "10";
                  
             when state_3 =>
                 -- Transitions vers les autres states
-                 if (d_strobe_btn(0) = '1' and d_btn_cd(0) = '1') then
+                 if (d_strobe_btn(0) = '1') then
                     state <= state_0;
                  end if;
-                 if (d_strobe_btn(1) = '1' and d_btn_cd(1) = '1') then
+                 if (d_strobe_btn(1) = '1') then
                     state <= state_2;
                  end if;
                  o_selection_fct <= "11";

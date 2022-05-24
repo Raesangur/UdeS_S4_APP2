@@ -3,7 +3,7 @@
 --    calcul_param_1.vhd
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
---    Université de Sherbrooke - Département de GEGI
+--    Universitï¿½ de Sherbrooke - Dï¿½partement de GEGI
 --
 --    Version         : 5.0
 --    Nomenclature    : inspiree de la nomenclature 0.2 GRAMS
@@ -17,8 +17,8 @@
 ---------------------------------------------------------------------------------------------
 --
 ---------------------------------------------------------------------------------------------
--- À FAIRE: 
--- Voir le guide de la problématique
+-- ï¿½ FAIRE: 
+-- Voir le guide de la problï¿½matique
 ---------------------------------------------------------------------------------------------
 --
 ---------------------------------------------------------------------------------------------
@@ -37,9 +37,9 @@ entity calcul_param_1 is
     Port (
     i_bclk    : in   std_logic; -- bit clock (I2S)
     i_reset   : in   std_logic;
-    i_en      : in   std_logic; -- un echantillon present a l'entrée
-    i_ech     : in   std_logic_vector (23 downto 0); -- echantillon en entrée
-    o_param   : out  std_logic_vector (7 downto 0)   -- paramètre calculé
+    i_en      : in   std_logic; -- un echantillon present a l'entrï¿½e
+    i_ech     : in   std_logic_vector (23 downto 0); -- echantillon en entrï¿½e
+    o_param   : out  std_logic_vector (7 downto 0)   -- paramï¿½tre calculï¿½
     );
 end calcul_param_1;
 
@@ -47,16 +47,159 @@ end calcul_param_1;
 
 architecture Behavioral of calcul_param_1 is
 
+type etat_verificateur_transition is (
+    signe_pareil,
+    signe_diff
+    );
+    
+type etat_compteur_frequence is (
+    transition,
+    compte,
+    output
+    );
+
 ---------------------------------------------------------------------------------
 -- Signaux
-----------------------------------------------------------------------------------
-    
+
+constant transition_buffer : std_logic_vector(3 downto 0) := "0110";
+
+signal new_strobe  : std_logic := '0';
+signal strobe_flag : std_logic := '0';
+
+signal previous_msb    : std_logic_vector(23 downto 0) := x"000000";
+signal data_transition : std_logic := '0';
+
+signal counter        : std_logic_vector(9 downto 0) := (others => '0');
+signal counter_buffer : std_logic_vector(9 downto 0) := (others => '0');
+signal should_output  : std_logic := '0';
+
+signal      verif_state   : etat_verificateur_transition := signe_pareil;
+signal next_verif_state   : etat_verificateur_transition := signe_pareil; 
+signal      counter_state : etat_compteur_frequence      := output;
+signal next_counter_state : etat_compteur_frequence      := output;
+
+signal param : std_logic_vector(7 downto 0) := (others => '0');
 
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
 begin 
 
-     o_param <= x"01";    -- temporaire ...
+    o_param <= param;
+
+    new_and_better_strobing : process (i_bclk, i_en)
+    begin
+        if (rising_edge(i_bclk)) then        
+            if (i_en = '1' and strobe_flag = '0') then
+                strobe_flag <= '1';
+                new_strobe  <= '1';
+            else
+                new_strobe <= '0';
+            end if;
+            
+            if (i_en = '0') then
+                strobe_flag <= '0';
+            end if;
+        end if;
+    end process;
+
+    state_machine_verification : process (new_strobe, i_reset, verif_state) is
+    begin
+        if (new_strobe'event and new_strobe = '1') then
+            if (i_reset = '1') then
+                verif_state <= signe_pareil;
+            else
+                verif_state <= next_verif_state;
+            end if;
+        end if;
+    end process;
+    
+    
+    state_machine_counter : process (new_strobe, i_reset, counter_state) is
+    begin
+        if (new_strobe'event and new_strobe = '1') then
+            if (i_reset = '1') then
+                counter_state <= output;
+            else
+                counter_state <= next_counter_state;
+            end if;
+        end if;
+    end process;
+    
+    
+    verification_transition : process (i_ech, previous_msb, verif_state) is
+    begin
+        if (new_strobe'event and new_strobe = '1') then
+        case verif_state is
+            when signe_pareil =>
+                data_transition <= '0';
+            
+                if (i_ech(23) /= previous_msb(23)) then
+                    previous_msb     <= i_ech;
+                    next_verif_state <= signe_diff;
+                end if;
+                
+            when signe_diff =>
+                data_transition  <= '1';
+                previous_msb     <= previous_msb;
+                next_verif_state <= signe_pareil;
+            when others =>
+            	data_transition  <= '0';
+            	previous_msb     <= x"000000";
+            	next_verif_state <= signe_pareil;
+        end case;
+        end if;
+    end process;
+
+
+	counter_frequency : process (new_strobe, data_transition) is
+	begin
+		if (new_strobe'event and new_strobe = '1') then
+		case counter_state is
+			when transition =>
+				counter        <= counter + 1;
+				counter_buffer <= counter_buffer;
+				should_output  <= should_output;
+
+				if (counter = transition_buffer) then
+					next_counter_state <= compte;
+				end if;
+			
+			when compte =>
+				counter        <= counter + 1;
+				counter_buffer <= counter_buffer;
+				should_output  <= should_output;
+
+				if (data_transition = '1') then
+					next_counter_state <= output;
+				end if;
+			
+			when output => 
+				counter        <= (others => '0');
+                counter_buffer <= counter;
+				should_output  <= not should_output;
+				
+				next_counter_state <= transition;
+			
+			when others =>
+				counter        <= (others => '0');
+				counter_buffer <= (others => '0');
+				should_output  <= not should_output;
+				
+				next_counter_state <= transition;	
+		end case;
+		end if;
+	end process;
+
+	postprocess : process(counter_buffer, should_output) is
+	begin
+		-- Affiche seulement Ã  chaque 2 demi-periodes
+		if (should_output = '1') then
+		  param(7 downto 1) <= counter_buffer(6 downto 0); 
+		  param(0)          <= '0';
+		else
+		  param <= param;
+		end if;
+	end process;
  
 end Behavioral;

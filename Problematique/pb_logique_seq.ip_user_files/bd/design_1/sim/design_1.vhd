@@ -1,8 +1,8 @@
---Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+--Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
---Tool Version: Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
---Date        : Mon Apr 18 12:39:41 2022
---Host        : DESKTOP-7O8NHLB running 64-bit major release  (build 9200)
+--Tool Version: Vivado v.2021.2 (lin64) Build 3367213 Tue Oct 19 02:47:39 MDT 2021
+--Date        : Wed May 18 15:29:53 2022
+--Host        : mini-pascal running 64-bit Ubuntu 22.04 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -305,13 +305,13 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
--- Modules à modifier:
+-- Modules Ã  modifier:
   -- MEF_decodeur_i2s (dans M1_decodeur_i2s)
   -- M5_parametre_1
   -- M6_parametre_2
   -- M8_commande
-  -- Pour plus de clarté, vous pouvez cacher les fils pour les horloges
-  -- et les resets dans les paramètres (engrenage en haut a droite de cette fenêtre).
+  -- Pour plus de clartÃ©, vous pouvez cacher les fils pour les horloges
+  -- et les resets dans les paramÃ¨tres (engrenage en haut a droite de cette fenÃªtre).
   entity design_1 is
   port (
     JPmod : out STD_LOGIC_VECTOR ( 7 downto 0 );
@@ -326,7 +326,7 @@ use UNISIM.VCOMPONENTS.ALL;
     o_sel_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=26,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=19,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=26,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=2,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=19,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""""""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -368,17 +368,6 @@ architecture STRUCTURE of design_1 is
     o_param : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component design_1_calcul_param_3_0_0;
-  component design_1_module_commande_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    o_reset : out STD_LOGIC;
-    i_btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    i_sw : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    o_btn_cd : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    o_selection_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    o_selection_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
-  );
-  end component design_1_module_commande_0_0;
   component design_1_mux4_0_0 is
   port (
     input0 : in STD_LOGIC_VECTOR ( 23 downto 0 );
@@ -422,6 +411,17 @@ architecture STRUCTURE of design_1 is
     dout : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component design_1_xlconstant_0_0;
+  component design_1_module_commande_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    o_reset : out STD_LOGIC;
+    i_btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    i_sw : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    o_btn_cd : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    o_selection_fct : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    o_selection_par : out STD_LOGIC_VECTOR ( 1 downto 0 )
+  );
+  end component design_1_module_commande_0_0;
   signal M10_conversion_affichage_JPmod : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal M8_commande_o_btn_cd : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal M8_commande_o_selection_par : STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -448,7 +448,7 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of clk_100MHz : signal is "xilinx.com:signal:clock:1.0 CLK.CLK_100MHZ CLK";
   attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of clk_100MHz : signal is "XIL_INTERFACENAME CLK.CLK_100MHZ, CLK_DOMAIN design_1_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
+  attribute X_INTERFACE_PARAMETER of clk_100MHz : signal is "XIL_INTERFACENAME CLK.CLK_100MHZ, CLK_DOMAIN design_1_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
 begin
   JPmod(7 downto 0) <= M10_conversion_affichage_JPmod(7 downto 0);
   clk_1 <= clk_100MHz;
