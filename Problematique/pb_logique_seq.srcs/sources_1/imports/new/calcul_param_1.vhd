@@ -87,25 +87,9 @@ begin
 
     o_param <= param;
 
-    new_and_better_strobing : process (i_bclk, i_en)
+    state_machine_verification : process (i_en, i_reset, verif_state) is
     begin
-        if (rising_edge(i_bclk)) then        
-            if (i_en = '1' and strobe_flag = '0') then
-                strobe_flag <= '1';
-                new_strobe  <= '1';
-            else
-                new_strobe <= '0';
-            end if;
-            
-            if (i_en = '0') then
-                strobe_flag <= '0';
-            end if;
-        end if;
-    end process;
-
-    state_machine_verification : process (new_strobe, i_reset, verif_state) is
-    begin
-        if (new_strobe'event and new_strobe = '1') then
+        if (i_en'event and i_en = '1') then
             if (i_reset = '1') then
                 verif_state <= signe_pareil;
             else
@@ -115,9 +99,9 @@ begin
     end process;
     
     
-    state_machine_counter : process (new_strobe, i_reset, counter_state) is
+    state_machine_counter : process (i_en, i_reset, counter_state) is
     begin
-        if (new_strobe'event and new_strobe = '1') then
+        if (i_en'event and i_en = '1') then
             if (i_reset = '1') then
                 counter_state <= output;
             else
@@ -129,7 +113,7 @@ begin
     
     verification_transition : process (i_ech, previous_msb, verif_state) is
     begin
-        if (new_strobe'event and new_strobe = '1') then
+        --if (i_en'event and i_en = '1') then
         case verif_state is
             when signe_pareil =>
                 data_transition <= '0';
@@ -148,13 +132,13 @@ begin
             	previous_msb     <= x"000000";
             	next_verif_state <= signe_pareil;
         end case;
-        end if;
+        --end if;
     end process;
 
 
-	counter_frequency : process (new_strobe, data_transition) is
+	counter_frequency : process (i_en, data_transition) is
 	begin
-		if (new_strobe'event and new_strobe = '1') then
+		if (i_en'event and i_en = '1') then
 		case counter_state is
 			when transition =>
 				counter        <= counter + 1;
