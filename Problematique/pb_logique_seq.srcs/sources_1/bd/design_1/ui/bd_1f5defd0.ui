@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.89465",
-   "Default View_TopLeft":"-201,227",
+   "Default View_ScaleFactor":"0.546087",
+   "Default View_TopLeft":"-172,-5",
    "ExpandedHierarchyInLayout":"",
    "comment_1":"Modules à modifier:
 MEF_decodeur_i2s (dans M1_decodeur_i2s)
@@ -68,7 +68,7 @@ pagesize -pg 1 -db -bbox -sgen -210 -30 2190 1140
    "linktotype_comment_1":"bd_design"
 }
 {
-   """""""""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""""""""":"1"
+   """"""""""""""""""""""""""""""""da_clkrst_cnt"""""""""""""""""""""""""""""""":"1"
 }
 {
    "/comment_1":"comment_1",
