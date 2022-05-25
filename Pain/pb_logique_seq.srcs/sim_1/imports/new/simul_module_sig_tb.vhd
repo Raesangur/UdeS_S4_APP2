@@ -143,9 +143,7 @@ end nextRightInput;
     -- La dur�e d'une p�riode reclrc est de 64,5 p�riodes de bclk ... ARRONDI a 64 pour simul
     --   
     constant c_mclk_Period       : time :=  80.715 ns;  -- 12.288 MHz
-    constant c_clk_p_Period      : time :=   8     ns;  -- 125 MHz
-    
-    signal d_en : std_logic := '0';
+    constant c_clk_p_Period      : time :=   8     ns;  -- 125 
 
 begin
    ----------------------------------------------------------------------------
@@ -174,7 +172,7 @@ begin
           i_data       =>  d_sig_pbdat,
           o_dat_left  =>  d_ech_reg_left,
           o_dat_right =>  d_ech_reg_right,
-          o_str_dat   =>  d_en
+          o_str_dat   =>  open
       );
     
   M5_UUT :  calcul_param_1
