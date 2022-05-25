@@ -71,7 +71,7 @@ signal data_transition : std_logic := '0';
 
 signal counter        : std_logic_vector(9 downto 0) := (others => '0');
 signal counter_buffer : std_logic_vector(9 downto 0) := (others => '0');
-signal should_output  : std_logic := '0';
+signal should_output  : std_logic := '1';
 
 signal      verif_state   : etat_verificateur_transition := signe_pareil;
 signal next_verif_state   : etat_verificateur_transition := signe_pareil; 
@@ -99,16 +99,16 @@ begin
     end process;
     
     
-    state_machine_counter : process (i_en, i_reset, counter_state) is
-    begin
-        if (i_en'event and i_en = '1') then
-            if (i_reset = '1') then
-                counter_state <= output;
-            else
-                counter_state <= next_counter_state;
-            end if;
-        end if;
-    end process;
+ --   state_machine_counter : process (i_en, i_reset, counter_state) is
+ --   begin
+ --       if (i_en'event and i_en = '1') then
+ --           if (i_reset = '1') then
+ --               counter_state <= output;
+ --           else
+ --               counter_state <= next_counter_state;
+ --           end if;
+ --       end if;
+ --   end process;
     
     
     verification_transition : process (i_ech, previous_msb, verif_state) is
@@ -136,7 +136,7 @@ begin
     end process;
 
 
-	counter_frequency : process (i_en, data_transition) is
+	counter_frequency : process (i_en, data_transition, counter_state) is
 	begin
 		if (i_en'event and i_en = '1') then
 		case counter_state is
@@ -146,7 +146,7 @@ begin
 				should_output  <= should_output;
 
 				if (counter = transition_buffer) then
-					next_counter_state <= compte;
+					counter_state <= compte;
 				end if;
 			
 			when compte =>
@@ -155,7 +155,7 @@ begin
 				should_output  <= should_output;
 
 				if (data_transition = '1') then
-					next_counter_state <= output;
+					counter_state <= output;
 				end if;
 			
 			when output => 
@@ -163,14 +163,14 @@ begin
                 counter_buffer <= counter;
 				should_output  <= not should_output;
 				
-				next_counter_state <= transition;
+				counter_state <= transition;
 			
 			when others =>
 				counter        <= (others => '0');
 				counter_buffer <= (others => '0');
 				should_output  <= not should_output;
 				
-				next_counter_state <= transition;	
+				counter_state <= transition;	
 		end case;
 		end if;
 	end process;
@@ -179,8 +179,8 @@ begin
 	begin
 		-- Affiche seulement à chaque 2 demi-periodes
 		if (should_output = '1') then
-		  param(7 downto 1) <= counter_buffer(6 downto 0); 
-		  param(0)          <= '0';
+		  param(7 downto 2) <= counter_buffer(5 downto 0); 
+		  param(1 downto 0)          <= "00";
 		else
 		  param <= param;
 		end if;
