@@ -52,7 +52,7 @@ component M9_codeur_i2s_imp_1VJCTGL
   );
 end component;
 
-component calcul_param_1
+component calcul_param_2
     Port (
     i_bclk    : in   std_logic; -- bit clock (I2S)
     i_reset   : in   std_logic;
@@ -175,7 +175,7 @@ begin
           o_str_dat   =>  open
       );
     
-  M5_UUT :  calcul_param_1
+  M5_UUT :  calcul_param_2
     Port map (
     i_bclk    => d_ac_bclk,
     i_reset   => s_reset,
