@@ -1,0 +1,203 @@
+
+*** Running vivado
+    with args -log design_1_mef_decod_i2s_v1b_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_mef_decod_i2s_v1b_0_0.tcl
+
+
+****** Vivado v2021.2 (64-bit)
+  **** SW Build 3367213 on Tue Oct 19 02:47:39 MDT 2021
+  **** IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source design_1_mef_decod_i2s_v1b_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2681.582 ; gain = 0.992 ; free physical = 9868 ; free virtual = 19922
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/usr/share/xilinx/Vivado/2021.2/data/ip'.
+Command: synth_design -top design_1_mef_decod_i2s_v1b_0_0 -part xc7z010clg400-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 93289
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:15 . Memory (MB): peak = 2681.695 ; gain = 0.000 ; free physical = 3759 ; free virtual = 12982
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'design_1_mef_decod_i2s_v1b_0_0' [/home/raesangur/github/UdeS_S4_APP2/Problematique/pb_logique_seq.gen/sources_1/bd/design_1/ip/design_1_mef_decod_i2s_v1b_0_0/synth/design_1_mef_decod_i2s_v1b_0_0.vhd:70]
+INFO: [Synth 8-3491] module 'mef_decod_i2s_v1b' declared at '/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.srcs/sources_1/imports/new/mef_decod_i2s_v1b.vhd:36' bound to instance 'U0' of component 'mef_decod_i2s_v1b' [/home/raesangur/github/UdeS_S4_APP2/Problematique/pb_logique_seq.gen/sources_1/bd/design_1/ip/design_1_mef_decod_i2s_v1b_0_0/synth/design_1_mef_decod_i2s_v1b_0_0.vhd:101]
+INFO: [Synth 8-638] synthesizing module 'mef_decod_i2s_v1b' [/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.srcs/sources_1/imports/new/mef_decod_i2s_v1b.vhd:52]
+INFO: [Synth 8-226] default block is never used [/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.srcs/sources_1/imports/new/mef_decod_i2s_v1b.vhd:98]
+WARNING: [Synth 8-6014] Unused sequential element d_reclrc_prec_reg was removed.  [/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.srcs/sources_1/imports/new/mef_decod_i2s_v1b.vhd:75]
+INFO: [Synth 8-256] done synthesizing module 'mef_decod_i2s_v1b' (1#1) [/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.srcs/sources_1/imports/new/mef_decod_i2s_v1b.vhd:52]
+INFO: [Synth 8-256] done synthesizing module 'design_1_mef_decod_i2s_v1b_0_0' (2#1) [/home/raesangur/github/UdeS_S4_APP2/Problematique/pb_logique_seq.gen/sources_1/bd/design_1/ip/design_1_mef_decod_i2s_v1b_0_0/synth/design_1_mef_decod_i2s_v1b_0_0.vhd:70]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:17 . Memory (MB): peak = 2681.695 ; gain = 0.000 ; free physical = 4988 ; free virtual = 14245
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:18 . Memory (MB): peak = 2681.695 ; gain = 0.000 ; free physical = 6709 ; free virtual = 15972
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:18 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6706 ; free virtual = 15969
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:19 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6668 ; free virtual = 15934
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	                2 Bit    Registers := 2     
++---Muxes : 
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 5     
+	   4 Input    1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+INFO: [Synth 8-3332] Sequential element (U0/next_state_reg[1]_C) is unused and will be removed from module design_1_mef_decod_i2s_v1b_0_0.
+INFO: [Synth 8-3332] Sequential element (U0/next_state_reg[0]_P) is unused and will be removed from module design_1_mef_decod_i2s_v1b_0_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 5991 ; free virtual = 15259
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 5987 ; free virtual = 15255
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 5982 ; free virtual = 15250
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6335 ; free virtual = 15600
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6347 ; free virtual = 15611
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6357 ; free virtual = 15621
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6356 ; free virtual = 15620
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6355 ; free virtual = 15619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6355 ; free virtual = 15619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT2 |     5|
+|2     |LUT3 |     1|
+|3     |LUT4 |     1|
+|4     |LUT6 |     2|
+|5     |FDCE |     1|
+|6     |FDPE |     1|
+|7     |FDRE |     2|
+|8     |LDC  |     2|
++------+-----+------+
+
+Report Instance Areas: 
++------+---------+------------------+------+
+|      |Instance |Module            |Cells |
++------+---------+------------------+------+
+|1     |top      |                  |    15|
+|2     |  U0     |mef_decod_i2s_v1b |    15|
++------+---------+------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6354 ; free virtual = 15618
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.586 ; gain = 7.891 ; free physical = 6360 ; free virtual = 15625
+Synthesis Optimization Complete : Time (s): cpu = 00:00:20 ; elapsed = 00:00:32 . Memory (MB): peak = 2689.594 ; gain = 7.891 ; free physical = 6360 ; free virtual = 15624
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2689.594 ; gain = 0.000 ; free physical = 6488 ; free virtual = 15752
+INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2745.613 ; gain = 0.000 ; free physical = 6810 ; free virtual = 16063
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2 instances were transformed.
+  LDC => LDCE: 2 instances
+
+Synth Design complete, checksum: c4bd620a
+INFO: [Common 17-83] Releasing license: Synthesis
+23 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:35 . Memory (MB): peak = 2745.613 ; gain = 64.031 ; free physical = 7171 ; free virtual = 16424
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Common 17-1381] The checkpoint '/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.runs/design_1_mef_decod_i2s_v1b_0_0_synth_1/design_1_mef_decod_i2s_v1b_0_0.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 2855.535 ; gain = 109.922 ; free physical = 5032 ; free virtual = 14281
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_mef_decod_i2s_v1b_0_0, cache-ID = 0f9411f0890ef804
+INFO: [Common 17-1381] The checkpoint '/home/raesangur/github/UdeS_S4_APP2/Pain/pb_logique_seq.runs/design_1_mef_decod_i2s_v1b_0_0_synth_1/design_1_mef_decod_i2s_v1b_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file design_1_mef_decod_i2s_v1b_0_0_utilization_synth.rpt -pb design_1_mef_decod_i2s_v1b_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri May 27 01:14:34 2022...
