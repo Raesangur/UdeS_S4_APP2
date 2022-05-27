@@ -47,37 +47,67 @@ end calcul_param_2;
 
 architecture Behavioral of calcul_param_2 is
 
+type power_state is (
+    calcul,
+    output
+    );
+
 ---------------------------------------------------------------------------------
 -- Signaux
 ----------------------------------------------------------------------------------
 
-signal temp : std_logic_vector(47 downto 0) := (others => '0');
-signal x    : std_logic_vector(23 downto 0) := (others => '0');
-signal y    : std_logic_vector(23 downto 0) := (others => '0');
-signal a    : std_logic_vector(28 downto 0) := (others => '0');
+signal param : std_logic_vector(7 downto 0) := (others => '0');
+
+signal x : std_logic_vector(47 downto 0) := (others => '0');
+signal y : std_logic_vector(47 downto 0) := (others => '0');
+signal a : std_logic_vector(52 downto 0) := (others => '0');
+
+signal old_i_en_val       : std_logic := '0';
+signal integratoire_state : power_state := calcul;
 
 ---------------------------------------------------------------------------------------------
 --    Description comportementale
 ---------------------------------------------------------------------------------------------
 begin 
 
+    o_param <= param;
+
      combinatoire : process (i_ech)
      begin
-            temp           <= i_ech * i_ech;
-            x(23 downto 0) <= temp(47 downto 24);
-            
-            a <= y * "11111";
+        x <= std_logic_vector(signed(i_ech) * signed(i_ech));
+        a <= y * "11111"; --  multiplication par 31
      end process;
      
-     integratoire : process (x, i_en, i_reset)
+     integratoire : process (i_bclk, i_en, i_reset)
      begin
-        if (i_en'event and i_en = '1') then
-            if (i_reset = '1') then
-                y <= (others => '0');
-            else
-                y       <= x + a(28 downto 5);
-                o_param <= y(22 downto 15);
+        if(rising_edge(i_bclk)) then
+        if (i_reset = '1') then
+            y <= (others => '0');
+            integratoire_state <= calcul;
+            param <= x"00";
+        else
+            case integratoire_state is
+                when calcul =>
+                    if (i_en = '1' and old_i_en_val = '0') then
+                        integratoire_state <= output;
+                        old_i_en_val <= '1';
+                        
+                        y <= x + a(47 downto 5);    -- addition + division par 32
+                        param <= param;
+                    end if;
+                    
+                when output =>
+                    integratoire_state <= calcul;
+                    param <= y(47 downto 40);
+                    
+                when others =>
+                    integratoire_state <= calcul;
+                    param <= param;
+            end case;
+            if (i_en = '0') then
+                old_i_en_val <= '0';
             end if;
+        end if;
         end if;
      end process;
 
